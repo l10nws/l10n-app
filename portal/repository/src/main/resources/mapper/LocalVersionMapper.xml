@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.LocaleVersionRepository">
+
+    <insert id="insert" parameterType="ws.l10n.portal.domain.LocaleVersion" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO locale_version
+        (locale_id, version_id)
+        VALUES
+        (#{localeId}, #{versionId})
+    </insert>
+
+
+    <select id="getByVersionId" parameterType="integer" resultType="ws.l10n.portal.domain.LocaleVersion">
+        SELECT
+        id,
+        locale_id as localeId,
+        version_id as versionId
+        FROM
+        locale_version
+        WHERE version_id = #{versionId}
+    </select>
+
+
+    <select id="getLocaleIdsByVersionId" parameterType="integer" resultType="string" >
+        SELECT
+        locale_id as localeId
+        FROM
+        locale_version
+        WHERE version_id = #{versionId}
+    </select>
+
+    <delete id="deleteByVersionIdAndLocaleId">
+        delete from locale_version where version_id = #{param1} and locale_id = #{param2}
+    </delete>
+
+</mapper>

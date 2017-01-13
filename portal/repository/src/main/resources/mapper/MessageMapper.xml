@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.MessageRepository">
+
+    <resultMap id="messageMap" type="ws.l10n.portal.domain.Message">
+        <id property="id" column="id"/>
+        <result property="versionId" column="version_id"/>
+        <result property="localeId" column="locale_id"/>
+        <result property="key" column="key"/>
+        <result property="value" column="value"/>
+    </resultMap>
+
+    <insert id="save" parameterType="ws.l10n.portal.domain.Message" statementType="PREPARED">
+        INSERT INTO message(version_id, locale_id, key, value) VALUES (#{versionId}, #{localeId}, #{key}, #{value});
+    </insert>
+
+    <select id="find" resultMap="messageMap">
+        SET constraint_exclusion = on;
+        SELECT * FROM message WHERE version_id = #{versionId} AND locale_id = #{localeId} AND key = #{key};
+    </select>
+
+    <select id="exists" resultType="java.lang.Boolean">
+        SET constraint_exclusion = on;
+        SELECT count(*) > 0 FROM message WHERE version_id = #{versionId} AND locale_id = #{localeId} AND key = #{key};
+    </select>
+
+    <insert id="saveAll" parameterType="ws.l10n.portal.domain.Message">
+        INSERT INTO message(version_id, locale_id, key, value)
+        VALUES <foreach item="item" collection="list" separator=",">(#{item.versionId}, #{item.localeId}, #{item.key}, #{item.value})</foreach>;
+    </insert>
+
+    <select id="findAll" resultMap="messageMap">
+        SET constraint_exclusion = on;
+        SELECT * FROM message WHERE version_id = #{versionId};
+    </select>
+
+    <delete id="deleteAll">
+        SET constraint_exclusion = on;
+        DELETE FROM message WHERE version_id = #{versionId} AND key IN <foreach item="item" collection="keys" open="(" separator="," close=")">#{item}</foreach>;
+    </delete>
+
+    <delete id="deleteAllByLocaleId">
+        SET constraint_exclusion = on;
+        DELETE FROM message WHERE version_id = #{versionId} AND locale_id = #{localeId} AND key IN <foreach item="item" collection="keys" open="(" separator="," close=")">#{item}</foreach>;
+    </delete>
+
+    <select id="findByVersionIdAndLocaleId" resultMap="messageMap">
+        SET constraint_exclusion = on;
+        SELECT * FROM message WHERE version_id = #{versionId} AND locale_id = #{localeId};
+    </select>
+
+    <select id="findByVersionIdAndKey" resultMap="messageMap">
+        SET constraint_exclusion = on;
+        SELECT * FROM message WHERE version_id = #{versionId} AND key = #{key};
+    </select>
+
+    <update id="updateKey">
+        SET constraint_exclusion = on;
+        UPDATE message SET key = #{key} WHERE version_id = #{versionId} AND id IN <foreach item="item" collection="messageIds" open="(" separator="," close=")">#{item}</foreach>;
+    </update>
+
+    <update id="updateValue">
+        SET constraint_exclusion = on;
+        UPDATE message SET value = #{value} WHERE version_id = #{versionId} AND id = #{messageId};
+    </update>
+
+    <insert id="copyMessages">
+        SET constraint_exclusion = on;
+        INSERT INTO message(version_id, locale_id, key, value) SELECT version_id, #{localeTo}, key, value FROM message WHERE version_id = #{versionId} AND locale_id = #{localeFrom};
+    </insert>
+
+    <insert id="createVersion">
+        SET constraint_exclusion = on;
+        INSERT INTO message(version_id, locale_id, key, value) SELECT #{versionId}, locale_id, key, value FROM message WHERE version_id = #{fromVersionId};
+    </insert>
+
+    <delete id="deleteByVersionId">
+        SET constraint_exclusion = on;
+        DELETE FROM message WHERE version_id = #{versionId};
+    </delete>
+
+    <delete id="deleteByVersionIdAndLocaleId">
+        SET constraint_exclusion = on;
+        DELETE FROM message WHERE version_id = #{versionId} AND locale_id = #{localeId};
+    </delete>
+
+</mapper>

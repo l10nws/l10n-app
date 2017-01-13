@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.ProjectRepository">
+
+
+    <resultMap id="projectMap" type="ws.l10n.portal.domain.Project">
+        <id column="p.id" property="id"/>
+        <result column="p.name" property="name"/>
+        <result column="p.owner_id" property="ownerId"/>
+        <result column="p.description" property="description"/>
+        <result column="p.creation_date" property="creationDate"/>
+        <result column="u.email" property="ownerEmail"/>
+        <result column="user_count" property="userCount"/>
+        <result column="bundle_count" property="bundleCount"/>
+    </resultMap>
+
+    <resultMap id="projectBaseMap" type="ws.l10n.portal.domain.ProjectBase">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="owner_id" property="ownerId"/>
+        <result column="description" property="description"/>
+        <result column="creation_date" property="creationDate"/>
+    </resultMap>
+
+    <resultMap id="projectViewMap" type="ws.l10n.portal.domain.view.ProjectView">
+        <id column="p.id" property="id"/>
+        <result column="p.name" property="name"/>
+        <result column="p.owner_id" property="ownerId"/>
+        <result column="p.description" property="description"/>
+        <result column="p.owner_id" property="ownerId"/>
+        <result column="p.owner_email" property="ownerEmail"/>
+        <result column="p.creation_date" property="creationDate"/>
+        <collection property="messageBundles"
+                    ofType="ws.l10n.portal.domain.view.MessageBundleView"
+                    resultMap="messageBundleViewMap" column="mb.project_id" notNullColumn="mb.id"/>
+    </resultMap>
+
+    <resultMap id="messageBundleViewMap" type="ws.l10n.portal.domain.view.MessageBundleView">
+        <id column="mb.id" property="id"/>
+        <result column="mb.label" property="label"/>
+        <result column="mb.project_id" property="projectId"/>
+        <result column="mb.uid" property="uid"/>
+        <result column="mb.owner_id" property="ownerId"/>
+        <result column="mb.owner_email" property="ownerEmail"/>
+        <result column="mb.creation_date" property="creationDate"/>
+        <collection property="versions"
+                    ofType="ws.l10n.portal.domain.Version"
+                    resultMap="versionMap" column="bv.message_bundle_id" notNullColumn="bv.id"/>
+    </resultMap>
+
+    <resultMap id="versionMap" type="ws.l10n.portal.domain.Version">
+        <id column="bv.id" property="id"/>
+        <id column="bv.version" property="version"/>
+        <id column="bv.message_bundle_id" property="messageBundleId"/>
+        <id column="bv.default_locale_id" property="defaultLocaleId"/>
+    </resultMap>
+
+    <select id="getProjectViewByProjectId" resultMap="projectViewMap" parameterType="java.lang.Integer">
+        select
+        p.id as "p.id",
+        p.name as "p.name",
+        p.owner_id as "p.owner_id",
+        p.description as "p.description",
+        p.creation_date as "p.creation_date",
+        u.email as "p.owner_email",
+
+        mb.id as "mb.id",
+        mb.label as "mb.label",
+        mb.project_id as "mb.project_id",
+        mb.uid as "mb.uid",
+        mb.owner_id as "mb.owner_id",
+        mb.creation_date as "mb.creation_date",
+        mbu.email as "mb.owner_email",
+
+        bv.id as "bv.id",
+        bv.default_locale_id as "bv.default_locale_id",
+        bv.version as "bv.version",
+        bv.message_bundle_id as "bv.message_bundle_id"
+
+        from project p
+        left join message_bundle mb on mb.project_id = p.id
+        left join portal_user u on u.id = p.owner_id
+        left join portal_user mbu on mbu.id = mb.owner_id
+        left join bundle_version bv on bv.message_bundle_id = mb.id
+        where p.id = #{id}
+
+    </select>
+
+    <select id="getProjectViewsByOwnerId" resultMap="projectViewMap" parameterType="java.lang.Integer">
+        select
+        p.id as "p.id",
+        p.name as "p.name",
+        p.owner_id as "p.owner_id",
+        p.description as "p.description",
+        p.creation_date as "p.creation_date",
+        u.email as "p.owner_email",
+
+        mb.id as "mb.id",
+        mb.label as "mb.label",
+        mb.project_id as "mb.project_id",
+        mb.uid as "mb.uid",
+        mb.owner_id as "mb.owner_id",
+        mb.creation_date as "mb.creation_date",
+        mbu.email as "mb.owner_email",
+
+        bv.id as "bv.id",
+        bv.default_locale_id as "bv.default_locale_id",
+        bv.version as "bv.version",
+        bv.message_bundle_id as "bv.message_bundle_id"
+
+        from project p
+        left join message_bundle mb on mb.project_id = p.id
+        left join portal_user u on u.id = p.owner_id
+        left join portal_user mbu on mbu.id = mb.owner_id
+        left join bundle_version bv on bv.message_bundle_id = mb.id
+        where p.owner_id = #{id}
+
+    </select>
+
+    <select id="getProjectViewsByUserId" resultMap="projectViewMap" parameterType="java.lang.Integer">
+        select
+        p.id as "p.id",
+        p.name as "p.name",
+        p.owner_id as "p.owner_id",
+        p.description as "p.description",
+        p.creation_date as "p.creation_date",
+        u.email as "p.owner_email",
+
+        mb.id as "mb.id",
+        mb.label as "mb.label",
+        mb.project_id as "mb.project_id",
+        mb.uid as "mb.uid",
+        mb.owner_id as "mb.owner_id",
+        mb.creation_date as "mb.creation_date",
+        mbu.email as "mb.owner_email",
+
+        bv.id as "bv.id",
+        bv.default_locale_id as "bv.default_locale_id",
+        bv.version as "bv.version",
+        bv.message_bundle_id as "bv.message_bundle_id"
+
+        from project p
+        left join message_bundle mb on mb.project_id = p.id
+        left join portal_user u on u.id = p.owner_id
+        left join portal_user mbu on mbu.id = mb.owner_id
+        left join bundle_version bv on bv.message_bundle_id = mb.id
+        left join user_permission up on up.project_id = p.id
+        where up.user_id = #{id}
+
+    </select>
+
+    <select id="getProjectsByOwnerId" parameterType="java.lang.Integer" resultMap="projectMap">
+        select
+            p.id as "p.id",
+            p.name as "p.name",
+            p.owner_id as "p.owner_id",
+            p.description as "p.description",
+            p.creation_date as "p.creation_date",
+            u.email as "u.email",
+            (1 + (select count(*) from project pr inner join user_permission up on up.project_id = pr.id where pr.id = p.id)) as "user_count",
+            (select count(*) from project pr inner join message_bundle mb on mb.project_id = pr.id  where pr.id = p.id) as "bundle_count"
+        from
+          project p
+           inner join portal_user u on u.id = p.owner_id
+        where p.owner_id = #{id}
+
+    </select>
+
+    <select id="getProjectsByUserId" parameterType="java.lang.Integer" resultMap="projectMap">
+        select
+            p.id as "p.id",
+            p.name as "p.name",
+            p.owner_id as "p.owner_id",
+            p.description as "p.description",
+            p.creation_date as "p.creation_date",
+            u.email as "u.email",
+            (1 + (select count(*) from project pr inner join user_permission up on up.project_id = pr.id where pr.id = p.id)) as "user_count",
+            (select count(*) from project pr inner join message_bundle mb on mb.project_id = pr.id  where p.id = pr.id) as "bundle_count"
+        from
+          project p
+           inner join portal_user u on u.id = p.owner_id
+           inner join user_permission up on up.project_id = p.id
+        where up.user_id = #{id}
+    </select>
+
+    <select id="getProjectById" parameterType="java.lang.Integer" resultMap="projectMap">
+        select
+        p.id as "p.id",
+        p.name as "p.name",
+        p.owner_id as "p.owner_id",
+        p.description as "p.description",
+        p.creation_date as "p.creation_date",
+        u.email as "u.email",
+        (1 + (select count(*) from project pr inner join user_permission up on up.project_id = pr.id where pr.id = p.id)) as "user_count",
+        (select count(*) from project pr inner join message_bundle mb on mb.project_id = pr.id  where p.id = pr.id) as "bundle_count"
+        from
+        project p
+        inner join portal_user u on u.id = p.owner_id
+        where p.id = #{id}
+    </select>
+
+    <update id="update" parameterType="ws.l10n.portal.domain.Project">
+        UPDATE project SET
+        name = #{name},
+        description = #{description}
+        WHERE
+        id = #{id}
+    </update>
+
+    <insert id="save" parameterType="ws.l10n.portal.domain.ProjectBase" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO project
+        (name, owner_id, description, creation_date)
+        VALUES
+        (#{name}, #{ownerId}, #{description},#{creationDate})
+    </insert>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="projectBaseMap">
+        SELECT
+         p.id, p.name, p.owner_id, p.description, p.creation_date
+        FROM
+          project p
+        WHERE
+          p.id = #{id}
+    </select>
+
+    <select id="getProjectName" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT
+         p.name
+        FROM
+          project p
+        WHERE
+          p.id = #{id}
+    </select>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE from project WHERE id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="projectBaseMap">
+        select * from  project p
+    </select>
+
+    <select id="isProjectOwner" resultType="boolean" parameterType="map">
+        SELECT CASE WHEN count(*) > 0 THEN 1 ELSE 0 END
+        FROM project p
+        WHERE p.id = #{projectId} AND p.owner_id = #{userId}
+    </select>
+
+
+    <select id="getProjectsByUserIdAndPermissions" resultMap="projectMap">
+          select
+            p.id as "p.id",
+            p.name as "p.name",
+            p.owner_id as "p.owner_id",
+            p.description as "p.description",
+            p.creation_date as "p.creation_date",
+            u.email as "u.email",
+            (1 + (select count(*) from project pr inner join user_permission up on up.project_id = pr.id where pr.id = p.id)) as "user_count",
+            (select count(*) from project pr inner join message_bundle mb on mb.project_id = pr.id  where p.id = pr.id) as "bundle_count"
+        from
+          project p
+           inner join portal_user u on u.id = p.owner_id
+           inner join user_permission up on up.project_id = p.id
+        where up.user_id = #{userId}
+         and up.permission in <foreach item="item" collection="permissions" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+
+</mapper>

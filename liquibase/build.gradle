@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.liquibase:liquibase-gradle-plugin:1.1.1'
+        classpath 'org.postgresql:postgresql:9.4-1202-jdbc42'
+    }
+}
+
+apply plugin: 'org.liquibase.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+liquibase {
+    activities {
+        portal {
+            changeLogFile "$projectDir/src/main/resources/portal/portal.groovy"
+            url "$portal_db_url"
+            username "$portal_db_username"
+            password "$portal_db_password"
+        }
+    }
+    if (project.hasProperty('runList')) {
+        runList = project.ext.runList
+    }
+}
+
+// WIN
+// ..\gradlew update -PrunList=portal

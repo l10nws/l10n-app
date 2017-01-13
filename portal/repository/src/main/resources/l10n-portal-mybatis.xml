@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="portalSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="portalDataSource"/>
+        <property name="configLocation" value="classpath:l10n-portal-mybatis-config.xml"/>
+        <!--
+            It appears that this information is optional so disable standard provider since it requires live data
+            source to be present upon bean initialization which we don't have in case of dynamic routing data source
+        -->
+        <property name="databaseIdProvider">
+            <null/>
+        </property>
+    </bean>
+
+    <!--<bean id="portalSqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+    <!--<constructor-arg name="sqlSessionFactory" ref="portalSqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="ws.l10n.portal.repository"/>
+        <property name="sqlSessionFactoryBeanName" value="portalSqlSessionFactory"/>
+    </bean>
+
+</beans>

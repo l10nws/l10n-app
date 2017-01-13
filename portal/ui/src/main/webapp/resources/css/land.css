@@ -1,0 +1,155 @@
+body {
+    background-color: #fff;
+}
+
+.navbar-brand.logo {
+    padding: 10px 30px 0 16px;
+}
+
+.navbar-brand.logo img {
+    height: 35px;
+    width: 54px;
+}
+
+h1 {
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.panel {
+    box-shadow: none;
+}
+
+.row {
+    padding: 30px;
+}
+
+.row p {
+    font-size: medium;
+}
+
+.row-wrapper {
+    background-color: #f0fdff;
+}
+.row-wrapper:nth-child(2n) {
+    background-color: #fff;
+}
+
+ul.navbar-right {
+    padding: 8px 0;
+    margin-right: 0;
+}
+
+.heading {
+    text-align: center;
+    font-size: 54px;
+    font-weight: 300;
+}
+
+.subheading {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.tagline {
+    padding: 15px;
+}
+.tagline .heading {
+    text-align: left;
+    font-weight: 300;
+}
+.tagline .subheading {
+    text-align: left;
+    font-weight: 300;
+    font-size: x-large;
+}
+
+/*------------------------------------------------------------------------------------------------------------*/
+.about {
+
+}
+
+.about .subheading {
+    padding: 0 0 20px 0;
+}
+
+.about img {
+    width: 100%
+}
+
+.about p {
+    font-size: 20px;
+    text-align: justify;
+    font-weight: 300;
+}
+
+/*------------------------------------------------------------------------------------------------------------*/
+
+.features {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.features .subheading {
+    
+}
+
+.feature {
+    margin-bottom: 20px;
+}
+
+.feature .text-muted {
+    font-weight: 300;
+}
+
+.feature .content {
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px 0;
+}
+
+.feature i {
+    display: inline-block;
+    font-size: 90px;
+    color: #1797be;
+}
+
+.feature .subheading {
+    font-size: 19px;
+    padding: 0;
+}
+
+/*------------------------------------------------------------------------------------------------------------*/
+
+.integrations {
+
+}
+.integration {
+    margin-top: -15px;
+}
+
+.integration .heading {
+    margin-top: 0;
+}
+
+.integration .content {
+    display: inline-block;
+}
+
+.integration .logo {
+    display: table;
+}
+
+.integration .logo a {
+    display: table-cell;
+    height: 105px;
+    vertical-align: bottom;
+    width: 230px;
+}
+
+.integration .logo img {
+    width: 100%;
+}

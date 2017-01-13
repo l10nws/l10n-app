@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+dependencies {
+    compile 'org.hibernate:hibernate-validator:5.2.0.Final'
+//    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.1'
+
+}

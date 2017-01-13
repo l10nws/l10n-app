@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+dependencies {
+    compile project(':portal:domain')
+    compile project(':portal:domain')
+//    compile 'com.zaxxer:HikariCP:2.3.8'
+//    compile 'com.zaxxer:HikariCP-java6:2.3.8'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'org.springframework:spring-context:4.1.7.RELEASE'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    compile 'org.springframework.data:spring-data-commons:1.12.1.RELEASE'
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework:spring-test:4.1.7.RELEASE'
+    testCompile 'com.h2database:h2:1.4.187'
+}

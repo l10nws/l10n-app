@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.VersionRepository">
+
+    <sql id="bundleColumns">
+      ${alias}.id,
+      ${alias}.message_bundle_id,
+      ${alias}.version,
+      ${alias}.creation_date,
+      ${alias}.modification_date,
+      ${alias}.view_date,
+      ${alias}.default_locale_id
+    </sql>
+
+    <resultMap id="bundleVersionMap" type="ws.l10n.portal.domain.Version">
+        <id column="id" property="id"/>
+        <result column="version" property="version"/>
+        <result column="message_bundle_id" property="messageBundleId"/>
+        <result column="creation_date" property="creationDate"/>
+        <result column="modification_date" property="modificationDate"/>
+        <result column="view_date" property="viewDate"/>
+        <result column="default_locale_id" property="defaultLocaleId"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="ws.l10n.portal.domain.Version" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO bundle_version
+        (version, message_bundle_id, creation_date, modification_date, default_locale_id)
+        VALUES
+        (#{version}, #{messageBundleId}, #{creationDate}, #{modificationDate}, #{defaultLocaleId})
+    </insert>
+
+
+    <update id="update" parameterType="ws.l10n.portal.domain.Version">
+        update bundle_version
+         set
+         version = #{version},
+         message_bundle_id = #{messageBundleId},
+         creation_date = #{creationDate},
+         modification_date = #{modificationDate},
+         default_locale_id = #{defaultLocaleId}
+         where id = #{id}
+    </update>
+
+    <select id="getByBundleId" parameterType="java.lang.Integer" resultMap="bundleVersionMap">
+        select
+        <include refid="bundleColumns">
+            <property name="alias" value="bv"/>
+        </include>
+        from bundle_version bv
+        WHERE bv.message_bundle_id = #{bundleId} ORDER BY bv.creation_date DESC
+    </select>
+
+    <select id="getByBundleIdAndVersionName" resultMap="bundleVersionMap">
+        select
+        <include refid="bundleColumns">
+            <property name="alias" value="bv"/>
+        </include>
+        from bundle_version bv
+        WHERE bv.message_bundle_id = #{param1}
+        AND bv.version = #{param2}
+    </select>
+
+    <select id="getByBundleUidAndVersionName" resultMap="bundleVersionMap">
+        select
+        <include refid="bundleColumns">
+            <property name="alias" value="bv"/>
+        </include>
+        from bundle_version bv
+        JOIN message_bundle mb on mb.id = bv.message_bundle_id
+        WHERE mb.uid = #{param1} and bv.version = #{param2}
+    </select>
+
+    <select id="getProjectId" parameterType="map" resultType="integer">
+      select mb.project_id from bundle_version bv
+      join message_bundle mb on mb.id = bv.message_bundle_id
+      where bv.id = #{versionId}
+    </select>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="bundleVersionMap">
+        select
+        <include refid="bundleColumns">
+            <property name="alias" value="bv"/>
+        </include>
+        from bundle_version bv
+        WHERE bv.id = #{id}
+    </select>
+
+    <update id="updateLabelAndDefaultLocale">
+        update bundle_version set version = #{param2}, default_locale_id = #{param3} where id = #{param1}
+    </update>
+
+    <update id="updateModificationDate">
+        update bundle_version set modification_date = #{param2} where id = #{param1}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM bundle_version WHERE id=#{param1}
+    </delete>
+
+    <update id="updateViewDate">
+        update bundle_version set view_date = now() where id = #{param1}
+    </update>
+</mapper>

@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+dependencies {
+    compile project(':portal:service')
+
+    compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile "javax.servlet:servlet-api:2.5"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.0'
+}
+
+war {
+    if (project.hasProperty("destinationDir")) {
+        destinationDir = file(project.destinationDir)
+    }
+    if (project.hasProperty("archiveName")) {
+        archiveName = project.archiveName
+    }
+}
+

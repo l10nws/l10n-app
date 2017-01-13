@@ -1,0 +1,13 @@
+rootProject.name = 'l10n'
+
+include 'api'
+include 'liquibase'
+
+include 'portal:common'
+include 'portal:property'
+include 'portal:configuration'
+include 'portal:ui'
+include 'portal:domain'
+include 'portal:service'
+include 'portal:repository'
+

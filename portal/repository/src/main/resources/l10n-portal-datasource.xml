@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="portalTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <qualifier value="PortalTransactional"/>
+
+        <property name="dataSource" ref="portalDataSource"/>
+    </bean>
+
+    <bean id="portalDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${l10n.portal.database.driver}"/>
+        <property name="url" value="${l10n.portal.database.url}"/>
+        <property name="username" value="${l10n.portal.database.username}"/>
+        <property name="password" value="${l10n.portal.database.password}"/>
+    </bean>
+
+    <!--<bean id="dataSource" class="org.postgresql.ds.PGSimpleDataSource">-->
+    <!--<property name="serverName" value="localhost"/>-->
+    <!--<property name="portNumber" value="5432"/>-->
+    <!--<property name="databaseName" value="l10n"/>-->
+    <!--<property name="user" value="postgres"/>-->
+    <!--<property name="password" value="1"/>-->
+    <!--</bean>-->
+
+</beans>

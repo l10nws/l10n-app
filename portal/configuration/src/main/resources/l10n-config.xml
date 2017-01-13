@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--
+        CHECKME: set your superuser email and password
+        default: admin@mail.com/admin
+        -->
+
+    <superusers>
+        <user>
+            <email>admin@l10n.ws</email>
+            <password>isoCJdgCfH</password>
+        </user>
+    </superusers>
+
+    <!--
+        smtp server configuration
+        default: false
+        -->
+    <smtp enable="true">
+        <host>mail.l10n.ws</host>
+        <port>25</port>
+        <username>l10n</username>
+        <password>o6yDSwCNPb</password>
+    </smtp>
+    <!--
+        Mail list is using if smtp enabled, set email for your company here
+        noreply: email for notifications
+        -->
+    <mail-list>
+        <item name="noreply">noreply@l10n.ws</item>
+    </mail-list>
+
+    <!--
+    Set your database source here.
+    default:
+    - url = jdbc:postgresql://localhost:5432/l10n-portal
+    - username = l10n-portal
+    - password = 1
+    - driverClassName = org.postgresql.Driver
+    -->
+    <datasource>
+        <url>jdbc:postgresql://localhost:5432/l10n-portal</url>
+        <username>l10n-portal</username>
+        <password>1</password>
+        <driverClassName>org.postgresql.Driver</driverClassName>
+    </datasource>
+
+</configuration>

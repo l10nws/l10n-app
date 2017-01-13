@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.BreadcrumbRepository">
+
+
+    <select id="getMessagesBreadcrumb" parameterType="java.lang.Integer" resultType="hashmap">
+
+        SELECT
+          p.id     AS project_id,
+          p.name   AS project_name,
+          mb.id    AS bundle_id,
+          mb.label AS bundle_label
+        FROM bundle_version bv
+          JOIN message_bundle mb ON mb.id = bv.message_bundle_id
+          JOIN project p ON p.id = mb.project_id
+        WHERE bv.id = #{versionId}
+
+    </select>
+
+</mapper>

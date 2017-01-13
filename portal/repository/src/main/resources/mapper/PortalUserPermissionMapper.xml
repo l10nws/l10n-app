@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.PortalUserPermissionRepository">
+    
+    <resultMap id="userPermissionMap" type="ws.l10n.portal.domain.UserPermission">
+        <result column="user_id" property="userId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="permission" property="permission"/>
+    </resultMap>
+
+    <resultMap id="userPermissionViewMap" type="ws.l10n.portal.domain.view.UserPermissionView">
+        <result column="user_id" property="userId"/>
+        <result column="user_email" property="email"/>
+        <result column="project_id" property="projectId"/>
+        <result column="permission" property="permission"/>
+    </resultMap>
+
+    <select id="findByUserIdAndProjectId" resultMap="userPermissionMap">
+        SELECT
+          up.user_id as "user_id",
+          p.id as "project_id",
+          up.permission as "permission"
+       FROM
+        project p
+       INNER JOIN user_permission up ON up.project_id = p.id WHERE up.user_id = #{param1} AND p.id = #{param2}
+    </select>
+
+    <select id="findByProjectId" parameterType="java.lang.Integer" resultMap="userPermissionViewMap">
+        SELECT
+          u.email as "user_email",
+          up.user_id as "user_id",
+          up.project_id as "project_id",
+          up.permission as "permission"
+       FROM
+        project p
+       INNER JOIN user_permission up ON up.project_id = p.id
+       INNER JOIN portal_user u ON u.id = up.user_id
+       WHERE p.id = #{id}
+    </select>
+
+    <insert id="save" parameterType="ws.l10n.portal.domain.UserPermission">
+         INSERT INTO user_permission
+        (user_id, project_id, permission)
+        VALUES
+        (#{userId}, #{projectId}, #{permission})
+    </insert>
+
+    <insert id="update" parameterType="ws.l10n.portal.domain.UserPermission">
+         UPDATE user_permission
+         SET permission = #{permission}
+          WHERE user_id = #{userId} AND project_id = #{projectId}
+    </insert>
+    
+    <delete id="deleteByProjectIdAndUserId">
+        DELETE FROM user_permission WHERE project_id = #{param1} AND user_id = #{param2}
+    </delete>
+
+    <delete id="deleteByProjectId">
+        DELETE FROM user_permission WHERE project_id = #{id}
+    </delete>
+
+</mapper>

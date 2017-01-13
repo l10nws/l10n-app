@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="DEFAULT" template="/WEB-INF/template/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/template/header.jsp" />
+        <put-attribute name="head" value="/WEB-INF/template/head.jsp" />
+        <put-attribute name="content" value="/WEB-INF/template/content.jsp" />
+        <put-attribute name="left_menu" value="/WEB-INF/template/left_menu.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/template/footer.jsp" />
+        <!--<put-attribute name="right_menu" value="/WEB-INF/template/right_menu.jsp" />-->
+        <put-attribute name="scripts" value="/WEB-INF/template/scripts.jsp" />
+    </definition>
+
+    <definition name="projects" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/project/projects.jsp" />
+    </definition>
+
+    <definition name="add_project" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/project/create_project.jsp" />
+    </definition>
+
+    <definition name="edit_project" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/project/create_project.jsp" />
+    </definition>
+
+    <definition name="bundle_list" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/bundle/bundle_list.jsp" />
+    </definition>
+
+    <definition name="create_project_bundle" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/bundle/create_project_bundle.jsp" />
+    </definition>
+
+    <definition name="create_bundle" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/bundle/create_bundle.jsp" />
+    </definition>
+
+    <definition name="project_bundles" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/bundle/project_bundles.jsp" />
+    </definition>
+
+    <definition name="edit_profile" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/profile/edit_profile.jsp" />
+    </definition>
+
+    <definition name="project_config" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/project/project_config.jsp" />
+    </definition>
+
+    <definition name="messages" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/messages/messages.jsp" />
+    </definition>
+
+    <definition name="versions" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/version/version_list.jsp" />
+    </definition>
+
+    <definition name="edit_version" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/version/version_form.jsp" />
+    </definition>
+
+    <definition name="recent" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/recent/recent.jsp" />
+    </definition>
+
+    <definition name="api_access" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/dev/api_access.jsp" />
+    </definition>
+
+    <definition name="users" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/user/users.jsp" />
+    </definition>
+
+    <definition name="create_user" extends="DEFAULT">
+        <put-attribute name="content" value="/WEB-INF/jsp/user/create_user.jsp" />
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <superusers>
+        <user>
+            <email>admin@mail.com</email>
+            <password>admin</password>
+        </user>
+    </superusers>
+
+    <smtp enable="true">
+        <host>localhost</host>
+        <port>587</port>
+        <username>admin</username>
+        <password>admin-password</password>
+    </smtp>
+
+    <mail-list>
+        <item name="noreply">noreply@yourcompany.com</item>
+    </mail-list>
+
+    <datasource>
+        <url>jdbc:postgresql://localhost:5432/l10n-portal</url>
+        <username>postgres</username>
+        <password>1</password>
+        <driverClassName>org.postgresql.Driver</driverClassName>
+    </datasource>
+
+</configuration>
