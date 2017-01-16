@@ -1,0 +1,151 @@
+
+/* Fixed top / Sticky footer styles -------------------------------------------------- */
+
+body {
+
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+
+    padding-top: 57px;
+    /* Padding bottom by footer height */
+    padding-bottom: 60px;
+    height: auto !important;
+    position: relative;
+
+
+}
+
+
+/*Rules for sizing the icon.*/
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+    color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #17a4cb;
+    z-index: 9999;
+}
+
+.footer p {
+    color: #ffffff;
+}
+
+/* Custom page CSS -------------------------------------------------- */
+
+.footer .container {
+    padding: 0 15px;
+}
+
+.footer .container .text-muted {
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.footer ul {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.footer ul li {
+    display: inline-block;
+}
+.footer ul li a {
+    color: #efefef;
+    padding-right: 20px;
+}
+
+.footer ul li a:hover {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+nav.navbar {
+    background-color: #1797be;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #17a4cb;
+    color: #ffffff;
+}
+
+.navbar-nav > li > a {
+    padding-bottom: 12px;
+}
+
+.nav .login.btn:hover {
+    background-color: #17a4cb;
+}
+
+nav.navbar .nav .active > a {
+    border-bottom: 5px solid #23b7e5;
+}
+
+.nav .login.btn {
+    background-color: #1797be;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.nav .dropdown-menu {
+    min-width: 370px;
+    margin-top: 11px !important;
+}
+
+.anchor {
+    display: block;
+    position: relative;
+    top: -70px;
+    visibility: hidden;
+}
+
+.or {
+    position: relative;
+}
+
+.span-or {
+    background: #fff none repeat scroll 0 0;
+    left: 50%;
+    margin-left: -16px;
+    position: absolute;
+    text-align: center;
+    top: -11px;
+    width: 28px;
+}

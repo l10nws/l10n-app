@@ -1,0 +1,44 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <global-method-security jsr250-annotations="enabled" pre-post-annotations="enabled" secured-annotations="enabled"/>
+
+    <http security="none" pattern="/resources/**"/>
+
+    <http authentication-manager-ref="authenticationManager" use-expressions="true">
+        <intercept-url pattern="/login" access="isAnonymous()"/>
+        <intercept-url pattern="/auth" access="permitAll()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <form-login login-page="/login" authentication-failure-url="/login?error"
+                    login-processing-url="/login" username-parameter="username" password-parameter="password"
+                    authentication-success-handler-ref="authenticationSuccessHandler"/>
+        <logout logout-success-url="/" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
+        <remember-me data-source-ref="portalDataSource" remember-me-parameter="remember"/>
+        <csrf disabled="false"/>
+    </http>
+
+    <beans:bean id="authenticationSuccessHandler"
+                class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="alwaysUseDefaultTargetUrl" value="false"/>
+        <beans:property name="targetUrlParameter" value="error"/>
+        <beans:property name="defaultTargetUrl" value="/index"/>
+    </beans:bean>
+
+    <authentication-manager id="authenticationManager">
+        <authentication-provider user-service-ref="springUserDetailsService">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <beans:bean id="springUserDetailsService" class="ws.l10n.portal.ui.security.PortalUserDetailsService"/>
+
+    <beans:bean id="permissionChecker" class="ws.l10n.portal.ui.authorize.PermissionChecker"/>
+
+</beans:beans>

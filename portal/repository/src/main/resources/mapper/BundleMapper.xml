@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.BundleRepository">
+
+    <sql id="bundleColumns"> ${alias}.id,${alias}.project_id,${alias}.uid,${alias}.label </sql>
+
+    <resultMap id="messageBundleMap" type="ws.l10n.portal.domain.MessageBundle">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="uid" property="uid"/>
+        <result column="label" property="label"/>
+        <result column="owner_id" property="ownerId"/>
+        <result column="creation_date" property="creationDate"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="ws.l10n.portal.domain.MessageBundle" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO message_bundle
+        (label, uid, project_id, owner_id, creation_date)
+        VALUES
+        (#{label}, #{uid}, #{projectId}, #{ownerId}, #{creationDate})
+    </insert>
+
+    <update id="update" parameterType="ws.l10n.portal.domain.MessageBundle">
+        UPDATE message_bundle SET
+        label = #{label}
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateUid" parameterType="ws.l10n.portal.domain.MessageBundle">
+        UPDATE message_bundle SET
+        uid = #{param2}
+        WHERE
+        id = #{param1}
+    </update>
+
+    <select id="getByUid" parameterType="java.lang.String" resultMap="messageBundleMap">
+        SELECT
+        <include refid="bundleColumns">
+            <property name="alias" value="mb"/>
+        </include>
+        FROM
+        message_bundle mb
+        WHERE
+        mb.uid = #{uid}
+    </select>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="messageBundleMap">
+        SELECT
+        <include refid="bundleColumns">
+            <property name="alias" value="mb"/>
+        </include>
+        FROM
+        message_bundle mb
+        WHERE
+        mb.id = #{id}
+    </select>
+
+    <select id="getByProjectId" parameterType="java.lang.Integer" resultMap="messageBundleMap">
+        SELECT
+        <include refid="bundleColumns">
+            <property name="alias" value="mb"/>
+        </include>
+        FROM
+        message_bundle mb
+        WHERE
+        mb.project_id = #{id}
+    </select>
+
+    <select id="getBundleLabel" parameterType="java.lang.Integer" resultType="string">
+        select label from message_bundle where id = #{id}
+</select>
+
+    <select id="getProjectName" parameterType="java.lang.Integer" resultType="string">
+        select p.name from project p JOIN message_bundle mb on mb.project_id = p.id where mb.id = #{id}
+    </select>
+
+    <select id="getProjectId" parameterType="java.lang.Integer" resultType="integer">
+        select p.id from project p JOIN message_bundle mb on mb.project_id = p.id where mb.id = #{bundleId}
+    </select>
+
+
+    <delete id="delete" parameterType="integer">
+        delete from message_bundle where id = #{id}
+    </delete>
+</mapper>

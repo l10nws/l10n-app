@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+dependencies {
+    compile project(':portal:common')
+    compile project(':portal:mail')
+    compile project(':portal:property')
+    compile project(':portal:domain')
+    compile project(':portal:repository')
+    compile project(':portal:configuration')
+
+    compile 'org.springframework:spring-beans:4.1.7.RELEASE'
+    compile 'org.springframework:spring-context:4.1.7.RELEASE'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile "javax.servlet:servlet-api:2.5"
+
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'org.springframework:spring-context-support:4.2.5.RELEASE'
+    compile 'javax.mail:mail:1.4'
+
+    compile 'org.springframework:spring-aop:4.1.4.RELEASE'
+    compile 'org.freemarker:freemarker:2.3.20'
+    compile 'org.springframework.security:spring-security-core:4.0.2.RELEASE'
+    compile 'commons-io:commons-io:2.4'
+
+    testCompile 'org.springframework:spring-test:2.5'
+    testCompile 'junit:junit:4.12'
+}

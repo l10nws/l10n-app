@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ws.l10n.portal.repository.LocaleRepository">
+
+    <select id="getLocaleViews" resultType="ws.l10n.portal.domain.view.LocaleView" useCache="true">
+        SELECT
+        l.id,
+        concat(l.language,' (', l.country,') ') as label
+        FROM
+        locales l
+    </select>
+
+
+    <select id="getLocalesByVersionId" parameterType="integer" resultType="ws.l10n.portal.domain.view.LocaleView">
+        SELECT
+        l.id,
+        concat(l.language,' (', l.country,') ') as label
+        FROM
+        locales l
+        JOIN locale_version lv on lv.locale_id = l.id
+        WHERE lv.version_id = #{versionId} order BY l.id DESC
+    </select>
+
+    <select id="getIdByAnyCaseId" resultType="java.lang.String">
+        select
+        l.id
+        from locales l
+        where lower(l.id) = lower(#{localeId})
+    </select>
+
+    <select id="getLocaleViewById" resultType="ws.l10n.portal.domain.view.LocaleView">
+        select
+         l.id, concat(l.language,' (', l.country,') ') as label
+        from locales l
+        where l.id = #{id}
+    </select>
+</mapper>

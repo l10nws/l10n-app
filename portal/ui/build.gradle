@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.0.2'
+    }
+}
+
+apply plugin: 'jetty'
+apply plugin: 'war'
+apply plugin: 'org.unbroken-dome.test-sets'
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+jettyRun {
+    httpPort = 8081
+    contextPath = ''
+}
+
+dependencies {
+    compile project(':portal:property')
+    compile project(':portal:service')
+    compile project(':portal:repository')
+    compile project(':portal:configuration')
+
+    compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
+    compile 'jstl:jstl:1.2'
+    compile 'org.apache.tiles:tiles-jsp:3.0.5'
+    compile 'commons-fileupload:commons-fileupload:1.3.1'
+    compile 'org.springframework.security:spring-security-core:4.0.2.RELEASE'
+    compile 'org.springframework.security:spring-security-web:4.0.2.RELEASE'
+    compile 'org.springframework.security:spring-security-taglibs:4.0.2.RELEASE'
+    compile 'org.springframework.security:spring-security-config:4.0.2.RELEASE'
+    compile 'org.hibernate:hibernate-validator:5.2.0.Final'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'org.springframework.integration:spring-integration-mail:4.2.0.RELEASE'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.4.6'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.6'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.6'
+
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+    testCompile group: 'org.testng', name: 'testng', version: '6.9.10'
+}
+
+
+war {
+    if (project.hasProperty("destinationDir")) {
+        destinationDir = file(project.destinationDir)
+    }
+    if (project.hasProperty("archiveName")) {
+        archiveName = project.archiveName
+    }
+}
+

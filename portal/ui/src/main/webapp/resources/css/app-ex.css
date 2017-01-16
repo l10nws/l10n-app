@@ -1,0 +1,363 @@
+/*------------------------------------------------------------------------------------------------------------------*/
+.glyphicon {
+    /*font-family: Glyphicons Halflings;*/
+    padding-right: 1px;
+    top: 0;
+}
+
+.glyphicon.glyphicon-trash:before {
+    content: "\f014";
+}
+
+.glyphicon.glyphicon-upload:before {
+    content: "\f093";
+}
+
+.glyphicon.glyphicon-file:before {
+    content: "\f15b"
+}
+
+.glyphicon.glyphicon-folder-open:before {
+    content: "\f115";
+}
+
+.glyphicon.glyphicon-zoom-in:before {
+    content: "\f00e";
+}
+
+.file-preview-detail-modal .modal-dialog {
+    width: 100%;
+}
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+body {
+    background-color: #fff;
+}
+
+.panel-login .error {
+    display: inline-block;
+    color: #f05050;
+    padding: 5px 0 5px 0;
+}
+
+.action-group {
+    white-space: nowrap;
+}
+
+.wrapper > section {
+    background-color: #fff;
+}
+
+.panel-login .panel-heading img,
+.panel-register .panel-heading img,
+.panel-password-new .panel-heading img,
+.panel-password-reset .panel-heading img {
+    height: 35px;
+}
+
+.topnavbar {
+    background: #1797be none;
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background-color: #f8f8f8 !important;
+}
+
+.app-btn {
+    min-width: 80px;
+    margin-right: 10px;
+}
+
+.breadcrumb li {
+    color: #656565;
+}
+
+.btn.app-item-btn {
+    margin-left: 4px;
+}
+
+.table-responsive .table.permission-table {
+    margin-bottom: 30px;
+}
+
+.table-responsive .table.permission-table th:first-child {
+    border-left: 1px solid #cfdbe2;
+}
+
+.table-responsive .table.permission-table th.add {
+    border-right: 1px solid #cfdbe2;
+}
+
+.table-responsive .table.permission-table th {
+    border-top: 1px solid #cfdbe2 !important;
+    border-bottom: 1px solid #cfdbe2;
+}
+
+.table-responsive .table.permission-table th {
+    background-color: #fafbfc;
+}
+
+.table-responsive .table.permission-table th.permission {
+    width: 111px;
+}
+
+.table-responsive .table.permission-table th.add {
+    width: 75px;
+}
+
+.breadcrumb a {
+    color: #656565;
+}
+
+.alert-success.fade.in,
+.alert-danger.fade.in {
+    opacity: 0.8;
+}
+
+.no-items {
+    border: solid 1px #ebebeb;
+    position: relative;
+    width: 370px;
+    padding: 20px;
+    height: 120px;
+    overflow: hidden;
+    margin: 100px auto 0 auto;
+    border-radius: 2px;
+}
+
+.no-items em {
+    font-size: 80px;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    color: #ebebeb;
+    z-index: -9;
+}
+
+.wd-wide .under-label {
+    position: absolute;
+    left: 24px;
+    top: -7px;
+}
+
+.relative {
+    position: relative;
+}
+
+.tooltipster-content {
+    max-width: 800px;
+    word-wrap: break-word;
+}
+
+td.clickable-row {
+    cursor: pointer;
+}
+
+textarea.message-area {
+    height: 1.93em;
+    margin-top: 3px;
+    padding-top: 1px;
+    padding-left: 4px;
+    width: 99%;
+}
+
+textarea.message-area.expanded {
+    z-index: 9999;
+    top: -1px;
+    height: 10em;
+    position: absolute;
+}
+
+
+/* Select 2 wrapper customizing */
+
+.select2-container-wrapper .select2-container {
+    width: 100% !important;
+}
+
+.select2-container-wrapper .select2-container .select2-selection {
+    font-size: 14px;
+    color: #3a3f51;
+    background: #ffffff none;
+    border: 1px solid #dde6e9;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.select2-container-wrapper .select2-container .select2-selection {
+    border-radius: 4px;
+}
+
+.select2-container-wrapper .select2-container .select2-selection:focus {
+    border-color: #66afe9;
+}
+
+.select2-container-wrapper .select2-container.selected .select2-selection {
+    border-radius: 4px;
+}
+
+.select2-container-wrapper .select2-container .select2-selection__choice {
+    border: none;
+    background-color: #ffffff;
+}
+
+.select2-container-wrapper .select2-container.selected .select2-search__field {
+    display: none;
+}
+
+.select2-container-wrapper .select2-container .select2-selection__choice__remove {
+    display: none;
+}
+
+.select2-container--open .select2-dropdown--below {
+    border-color: #cfdbe2;
+}
+
+/* end select2 */
+
+.content-wrapper > h3, .content-wrapper > .content-heading {
+    background-color: #fff;
+}
+
+/* messages */
+
+.message-tabs .default-locale {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    font-size: 0.7em;
+}
+
+.dropdown-action {
+    padding: 4px 7px 0;
+}
+
+.dropdown-action .action-btn {
+    padding: 4px 6px 0;
+}
+
+.toolbar {
+    border: 1px solid #ededed;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px;
+    width: 100%;
+}
+
+.toolbar .add-all {
+    position: relative;
+}
+
+.toolbar .fa-bars {
+    font-size: 0.5em;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+}
+
+.message-table th,
+.message-table td {
+    padding: 0 5px 0 0 !important;
+}
+
+.message-table th {
+    padding: 5px 5px 0 0 !important;
+}
+
+.message-table .number {
+    width: 5px;
+    vertical-align: middle;
+}
+
+.message-table .key {
+    width: 45%;
+    vertical-align: top;
+}
+
+.message-table .value {
+    position:relative;
+    vertical-align: top;
+}
+
+.message-table .check {
+    width: 10px;
+    vertical-align: top;
+    text-align: right;
+}
+
+.message-table .c-checkbox {
+    padding: 0;
+    margin: 0;
+}
+.message-table .c-checkbox span {
+    margin: 0;
+}
+
+.message-table .check a {
+    font-size:1.6em;
+}
+
+.message-table .no-record {
+    text-align: center;
+}
+
+.message-table .key .form-control,
+.message-table .value .form-control {
+    border-radius: 0;
+}
+
+.message-table .key input[type="text"].form-control {
+    padding: 0 4px;
+    height: 27px;
+    margin-top: 3px;
+}
+
+.add-message input[name="key"],
+.edit-message input[name="key"] {
+    margin-bottom: 9px;
+}
+
+.or {
+    position: relative;
+}
+
+.span-or {
+    background: #fff none repeat scroll 0 0;
+    left: 50%;
+    margin-left: -16px;
+    position: absolute;
+    text-align: center;
+    top: -11px;
+    width: 28px;
+}
+
+.footer ul {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.footer ul li {
+    display: inline-block;
+}
+
+.footer ul li a {
+    color: #656565;
+    padding-right: 20px;
+}
+
+.footer ul li a:hover {
+    color: #474747;
+    cursor: pointer;
+    text-decoration: none;
+}
