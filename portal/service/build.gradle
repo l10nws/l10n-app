@@ -2,7 +2,6 @@ apply plugin: 'java'
 
 dependencies {
     compile project(':portal:common')
-    compile project(':portal:mail')
     compile project(':portal:property')
     compile project(':portal:domain')
     compile project(':portal:repository')
