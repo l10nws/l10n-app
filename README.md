@@ -1,2 +1,4 @@
-# l10n-app
-Opensource l10n.ws applications
+
+L10n Portal is Localization Management Service
+Simplify localization and internationalization process on your product.
+
