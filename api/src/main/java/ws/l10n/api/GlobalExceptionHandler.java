@@ -2,6 +2,7 @@ package ws.l10n.api;
 
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,6 +48,14 @@ public class GlobalExceptionHandler {
     public ErrorResponse defaultExceptionHandler(Exception e) {
         LOGGER.error(e.getMessage(), e);
         return new ErrorResponse(ApiResponseStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+    }
+
+    @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
+    @ResponseStatus(value = HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ResponseBody
+    public ErrorResponse defaultHttpMediaTypeNotSupportedException(Exception e) {
+        LOGGER.error(e.getMessage(), e);
+        return new ErrorResponse(ApiResponseStatus.REQUEST_CONTENT_TYPE_NOT_SUPPORTED, "Unsupported 'Content-Type', please use 'application/json'.");
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

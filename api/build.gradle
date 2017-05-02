@@ -7,6 +7,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'jetty'
 
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
@@ -27,5 +28,10 @@ war {
     if (project.hasProperty("archiveName")) {
         archiveName = project.archiveName
     }
+}
+
+jettyRun {
+    httpPort = 8081
+    contextPath = ''
 }
 

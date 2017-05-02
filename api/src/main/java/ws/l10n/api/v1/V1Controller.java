@@ -1,4 +1,4 @@
-package ws.l10n.api;
+package ws.l10n.api.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ws.l10n.api.ApiResponseStatus;
+import ws.l10n.api.ErrorResponse;
 import ws.l10n.common.logging.LoggerUtils;
 import ws.l10n.portal.domain.Message;
 import ws.l10n.portal.domain.Version;
@@ -54,7 +56,7 @@ public class V1Controller {
         return "{\"buildVersion\": " + version + "}";
     }
 
-    @RequestMapping("/message")
+    @RequestMapping(value = "/message", method = RequestMethod.GET)
     public void handle(@RequestParam("bundleUid") String bundleUid,
                        @RequestParam(value = "locale[]", required = false) String[] locale,
                        @RequestParam(value = "version") String version,

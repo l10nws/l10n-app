@@ -12,7 +12,7 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/v1**" />
+            <mvc:mapping path="/v1/**" />
             <bean class="ws.l10n.api.web.SecurityInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

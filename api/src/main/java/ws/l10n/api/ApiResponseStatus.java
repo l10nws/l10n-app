@@ -11,7 +11,8 @@ public enum ApiResponseStatus {
     BAD_HTTP_REQUEST(4),
     MISSING_PARAMETER(5),
     INTERNAL_SERVER_ERROR(6),
-    UNAUTHORIZED(7);
+    UNAUTHORIZED(7),
+    REQUEST_CONTENT_TYPE_NOT_SUPPORTED(8);
 
     private int code;
 
