@@ -1,11 +1,11 @@
 apply plugin: 'java'
 
 dependencies {
-    compile project(':portal:common')
-    compile project(':portal:property')
-    compile project(':portal:domain')
-    compile project(':portal:repository')
-    compile project(':portal:configuration')
+    compile project(':l10n-portal:common')
+    compile project(':l10n-portal:property')
+    compile project(':l10n-portal:domain')
+    compile project(':l10n-portal:repository')
+    compile project(':l10n-portal:configuration')
 
     compile 'org.springframework:spring-beans:4.1.7.RELEASE'
     compile 'org.springframework:spring-context:4.1.7.RELEASE'

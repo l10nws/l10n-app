@@ -1,8 +1,8 @@
 apply plugin: 'java'
 
 dependencies {
-    compile project(':portal:domain')
-    compile project(':portal:domain')
+    compile project(':l10n-portal:domain')
+    compile project(':l10n-portal:domain')
 //    compile 'com.zaxxer:HikariCP:2.3.8'
 //    compile 'com.zaxxer:HikariCP-java6:2.3.8'
     compile 'org.mybatis:mybatis-spring:1.2.3'

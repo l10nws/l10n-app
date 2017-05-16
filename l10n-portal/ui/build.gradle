@@ -21,10 +21,10 @@ jettyRun {
 }
 
 dependencies {
-    compile project(':portal:property')
-    compile project(':portal:service')
-    compile project(':portal:repository')
-    compile project(':portal:configuration')
+    compile project(':l10n-portal:property')
+    compile project(':l10n-portal:service')
+    compile project(':l10n-portal:repository')
+    compile project(':l10n-portal:configuration')
 
     compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
     compile 'jstl:jstl:1.2'

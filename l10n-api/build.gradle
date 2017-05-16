@@ -12,7 +12,7 @@ sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
 dependencies {
-    compile project(':portal:service')
+    compile project(':l10n-portal:service')
 
     compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
     compile 'org.apache.commons:commons-lang3:3.4'
