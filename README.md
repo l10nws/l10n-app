@@ -29,6 +29,12 @@ Copy artifact in 'webapps' directory in installed servlet container and start it
 ## Built With
 
 * [Gradle](https://gradle.org/) - Dependency Management
+```groovy
+gradlew :l10n-portlal:war
+```
+```groovy
+gradlew :l10n-api:war
+```
 
 ## Database Versioning 
 
