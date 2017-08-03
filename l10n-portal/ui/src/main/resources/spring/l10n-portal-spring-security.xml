@@ -11,7 +11,8 @@
     <http security="none" pattern="/resources/**"/>
 
     <http authentication-manager-ref="authenticationManager" use-expressions="true">
-        <intercept-url pattern="/login" access="isAnonymous()"/>
+        <intercept-url pattern="/register" access="permitAll()"/>
+        <intercept-url pattern="/login" access="permitAll()"/>
         <intercept-url pattern="/auth" access="permitAll()"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login login-page="/login" authentication-failure-url="/login?error"

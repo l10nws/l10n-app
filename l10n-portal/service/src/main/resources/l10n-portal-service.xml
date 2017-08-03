@@ -7,7 +7,6 @@
     <import resource="l10n-portal-repository.xml"/>
     <import resource="l10n-property.xml"/>
     <import resource="l10n-common.xml"/>
-    <import resource="l10n-mail.xml"/>
 
     <context:component-scan base-package="ws.l10n.portal.service"/>
 

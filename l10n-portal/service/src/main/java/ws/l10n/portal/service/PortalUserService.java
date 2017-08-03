@@ -1,5 +1,6 @@
 package ws.l10n.portal.service;
 
+import com.google.common.base.Function;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -103,6 +104,19 @@ public class PortalUserService {
             projectService.delete(project.getId());
         }
         userRepository.delete(userId);
+    }
+
+    public boolean register(String email, String password, Function<PortalUser, Boolean> onSuccess) {
+        if (isEmailExist(email)) {
+            return false;
+        } else {
+            PortalUser portalUser = createUser(email, password);
+            return onSuccess.apply(portalUser);
+        }
+    }
+
+    public boolean isEmailExist(String email) {
+        return userRepository.getByEmail(email) != null;
     }
 
 

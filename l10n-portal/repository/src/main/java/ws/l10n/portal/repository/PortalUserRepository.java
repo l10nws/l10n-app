@@ -25,7 +25,6 @@ public interface PortalUserRepository {
 
     PortalUser getByAccessToken(String token);
 
-
     String getAuthToken(@Param("userId") int userId);
 
     String getAuthTokenByEmail(@Param("email") String email);

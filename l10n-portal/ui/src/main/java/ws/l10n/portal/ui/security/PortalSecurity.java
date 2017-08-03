@@ -11,6 +11,15 @@ import ws.l10n.portal.domain.PortalUser;
  */
 public class PortalSecurity {
 
+
+    public static boolean isLoggedin() {
+        try {
+            return currentUser() != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static PortalUserDetails currentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {

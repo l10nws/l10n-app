@@ -4,6 +4,8 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
+    <definition name="EXTERNAL" template="/WEB-INF/template/ext/template.jsp"/>
+
     <definition name="DEFAULT" template="/WEB-INF/template/template.jsp">
         <put-attribute name="header" value="/WEB-INF/template/header.jsp" />
         <put-attribute name="head" value="/WEB-INF/template/head.jsp" />
@@ -76,6 +78,14 @@
 
     <definition name="create_user" extends="DEFAULT">
         <put-attribute name="content" value="/WEB-INF/jsp/user/create_user.jsp" />
+    </definition>
+
+    <definition name="login" extends="EXTERNAL">
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
+    </definition>
+
+    <definition name="register" extends="EXTERNAL">
+        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
     </definition>
 
 </tiles-definitions>
