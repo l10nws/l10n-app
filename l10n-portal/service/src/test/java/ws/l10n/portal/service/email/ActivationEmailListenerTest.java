@@ -42,7 +42,6 @@ public class ActivationEmailListenerTest {
         velocityEngine.setProperty("resource.loader","class");
         velocityEngine.setProperty("class.resource.loader.class","org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         velocityEngine.init();
-        MockitoAnnotations.initMocks(ActivationEmailListener.class);
     }
 
     @Test
