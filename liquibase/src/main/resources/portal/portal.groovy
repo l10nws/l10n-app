@@ -10,4 +10,7 @@ databaseChangeLog {
     changeSet(id: '2016-22-04-0', author: 'Anton Mokshyn <mokshino@gmail.com>') {
         sqlFile(path: 'sql/message-partition.sql', relativeToChangelogFile: 'true', splitStatements: 'false')
     }
+    changeSet(id: '2017-15-10-0', author: 'Andrii_Paias') {
+        sqlFile(path: 'sql/account-activation.sql', relativeToChangelogFile: 'true', splitStatements: 'false')
+    }
 }

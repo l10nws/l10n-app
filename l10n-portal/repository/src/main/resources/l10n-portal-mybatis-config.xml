@@ -14,5 +14,6 @@
         <mapper resource="mapper/LocalVersionMapper.xml"/>
         <mapper resource="mapper/BreadcrumbMapper.xml"/>
         <mapper resource="mapper/MessageMapper.xml"/>
+        <mapper resource="mapper/ActivationTokenMapper.xml"/>
     </mappers>
 </configuration>

@@ -21,17 +21,15 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
     private final Boolean accountNonExpired;
     private final Boolean accountNonLocked;
     private final Boolean credentialsNonExpired;
-    private final Boolean enabled;
     private final Boolean googleSignIn;
 
     public PortalUserDetails(Integer id, String email, String firstName, String lastName, String password, String accessToken, Role role,
-                             Boolean accountNonExpired, Boolean accountNonLocked,
-                             Boolean credentialsNonExpired, Boolean enabled, Set<GrantedAuthority> authorities, Boolean googleSignIn) {
-        super(id, email, firstName, lastName, password, accessToken, role);
+                             Boolean activated, Boolean accountNonExpired, Boolean accountNonLocked,
+                             Boolean credentialsNonExpired, Set<GrantedAuthority> authorities, Boolean googleSignIn) {
+        super(id, email, firstName, lastName, password, accessToken, role, activated);
         this.accountNonExpired = accountNonExpired;
         this.accountNonLocked = accountNonLocked;
         this.credentialsNonExpired = credentialsNonExpired;
-        this.enabled = enabled;
         this.authorities = new HashSet<GrantedAuthority>(authorities);
         this.authorities.add(new SimpleGrantedAuthority(role.name()));
         this.googleSignIn = googleSignIn;
@@ -65,7 +63,7 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return isActivated() ;
     }
 
     public boolean getGoogleSignIn() {
@@ -73,11 +71,10 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
     }
 
     public PortalUserDetails() {
-        super(null, null, null, null, null, null, null);
+        super(null, null, null, null, null, null, null,false);
         this.accountNonExpired = null;
         this.accountNonLocked = null;
         this.credentialsNonExpired = null;
-        this.enabled = null;
         this.authorities = null;
         this.googleSignIn = null;
     }
@@ -86,52 +83,15 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
         return new Builder();
     }
 
-    public static class Builder extends PortalUser.Builder  {
+    public static class Builder extends PortalUser.Builder<Builder>  {
 
         private Boolean accountNonExpired = true;
         private Boolean accountNonLocked = true;
         private Boolean credentialsNonExpired = true;
-        private Boolean enabled = true;
         private Boolean googleSignIn = false;
 
         private Set<GrantedAuthority> authorities = Collections.<GrantedAuthority>emptySet();
-
-        @Override
-        public Builder setId(Integer id) {
-            this.id = id;
-            return this;
-        }
-
-        @Override
-        public Builder setEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        @Override
-        public Builder setFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        @Override
-        public Builder setLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        @Override
-        public Builder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        @Override
-        public Builder setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-            return this;
-        }
-
+        
         public Builder setAccountNonExpired(boolean accountNonExpired) {
             this.accountNonExpired = accountNonExpired;
             return this;
@@ -144,11 +104,6 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
 
         public Builder setCredentialsNonExpired(boolean credentialsNonExpired) {
             this.credentialsNonExpired = credentialsNonExpired;
-            return this;
-        }
-
-        public Builder setEnabled(boolean enabled) {
-            this.enabled = enabled;
             return this;
         }
 
@@ -172,7 +127,6 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
             this.accountNonExpired = source.accountNonExpired;
             this.accountNonLocked = source.accountNonLocked;
             this.credentialsNonExpired = source.credentialsNonExpired;
-            this.enabled = source.enabled;
             this.authorities = source.authorities;
             this.googleSignIn = source.googleSignIn;
             return this;
@@ -180,8 +134,8 @@ public class PortalUserDetails extends PortalUser implements UserDetails {
 
         @Override
         public PortalUserDetails build() {
-            return new PortalUserDetails(id, email, firstName, lastName, password, accessToken, role,
-                    accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, authorities, googleSignIn);
+            return new PortalUserDetails(id, email, firstName, lastName, password, accessToken, role, activated,
+                    accountNonExpired, accountNonLocked, credentialsNonExpired, authorities, googleSignIn);
         }
     }
 

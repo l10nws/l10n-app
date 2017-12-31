@@ -14,12 +14,13 @@ public class PortalUser {
     private String password;
     private String accessToken;
     private Role role;
+    private Boolean activated;
 
     public PortalUser() {
 
     }
 
-    public PortalUser(Integer id, String email, String firstName, String lastName, String password, String accessToken, Role role) {
+    public PortalUser(Integer id, String email, String firstName, String lastName, String password, String accessToken, Role role, Boolean activated) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -27,6 +28,7 @@ public class PortalUser {
         this.password = password;
         this.accessToken = accessToken;
         this.role = role;
+        this.activated = activated;
     }
 
     public Integer getId() {
@@ -89,7 +91,16 @@ public class PortalUser {
         return role;
     }
 
-    public static class Builder {
+    public Boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static class Builder<T extends Builder<T>> {
 
         protected Integer id;
         protected String email;
@@ -98,43 +109,49 @@ public class PortalUser {
         protected String password;
         protected String accessToken;
         protected Role role;
-
-        public Builder setRole(Role role) {
+        protected Boolean activated;
+        
+        public T setRole(Role role) {
             this.role = role;
-            return this;
+            return (T) this;
         }
 
-        public Builder setId(Integer id) {
+        public T setId(Integer id) {
             this.id = id;
-            return this;
+            return (T) this;
         }
 
-        public Builder setEmail(String email) {
+        public T setEmail(String email) {
             this.email = email;
-            return this;
+            return (T) this;
         }
 
-        public Builder setFirstName(String firstName) {
+        public T setFirstName(String firstName) {
             this.firstName = firstName;
-            return this;
+            return  (T) this;
         }
 
-        public Builder setLastName(String lastName) {
+        public T setLastName(String lastName) {
             this.lastName = lastName;
-            return this;
+            return (T) this;
         }
 
-        public Builder setPassword(String password) {
+        public T setPassword(String password) {
             this.password = password;
-            return this;
+            return (T) this;
         }
 
-        public Builder setAccessToken(String accessToken) {
+        public T setAccessToken(String accessToken) {
             this.accessToken = accessToken;
-            return this;
+            return (T) this;
         }
 
-        public Builder from(PortalUser source) {
+        public T setActivated(Boolean activated) {
+            this.activated = activated;
+            return (T) this;
+        }
+
+        public T from(PortalUser source) {
             this.id = source.getId();
             this.email = source.getEmail();
             this.firstName = source.getFirstName();
@@ -142,11 +159,12 @@ public class PortalUser {
             this.password = source.getPassword();
             this.accessToken = source.getAccessToken();
             this.role = source.getRole();
-            return this;
+            this.activated = source.isActivated();
+            return (T) this;
         }
 
         public PortalUser build() {
-            return new PortalUser(id, email, firstName, lastName, password, accessToken, role);
+            return new PortalUser(id, email, firstName, lastName, password, accessToken, role, activated);
         }
     }
 
