@@ -8,7 +8,7 @@
         </user>
     </superusers>
 
-    <smtp enable="true">
+    <smtp enable="true" emailAccountActivationEnabled="true">
         <host>localhost</host>
         <port>587</port>
         <username>admin</username>

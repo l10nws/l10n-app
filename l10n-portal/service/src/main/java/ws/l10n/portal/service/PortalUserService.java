@@ -1,8 +1,8 @@
 package ws.l10n.portal.service;
 
-import com.google.common.base.Function;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,15 +10,22 @@ import org.springframework.transaction.annotation.Transactional;
 import ws.l10n.common.logging.LoggerUtils;
 import ws.l10n.common.util.TokenGenerator;
 import ws.l10n.portal.config.meta.UserMeta;
+import ws.l10n.portal.domain.ActivationToken;
 import ws.l10n.portal.domain.PortalUser;
 import ws.l10n.portal.domain.Project;
 import ws.l10n.portal.domain.Role;
+import ws.l10n.portal.repository.ActivationTokenRepository;
 import ws.l10n.portal.repository.PortalUserRepository;
 import ws.l10n.portal.repository.ProjectRepository;
 import ws.l10n.portal.service.event.PortalUserChangedEvent;
+import ws.l10n.portal.service.event.PortalUserRegisteredEvent;
+import ws.l10n.portal.service.exception.ActivationException;
+import ws.l10n.portal.service.exception.EmailExistsException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author Anton Mokshyn
@@ -39,24 +46,28 @@ public class PortalUserService {
     private TokenGenerator tokenGenerator;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    public PortalUser createUser(String email, String rawPassword) {
-        return create(email, rawPassword, null, null, Role.ROLE_USER);
+    @Autowired
+    private ActivationTokenRepository tokenRepository;
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+    
+    public PortalUser createUser(String email, String rawPassword, boolean activateAccount) {
+        return create(email, rawPassword, null, null, Role.ROLE_USER, activateAccount);
     }
 
     public PortalUser createAdmin(String email, String rawPassword) {
-        return create(email, rawPassword, null, null, Role.ROLE_ADMIN);
+        return create(email, rawPassword, null, null, Role.ROLE_ADMIN, true);
     }
 
     public PortalUser createSuperuser(String email, String rawPassword) {
-        return create(email, rawPassword, null, null, Role.ROLE_SUPERUSER);
+        return create(email, rawPassword, null, null, Role.ROLE_SUPERUSER, true);
     }
 
     public PortalUser get(Integer id) {
         return userRepository.get(id);
     }
 
-    public PortalUser create(String email, String rawPassword, String firstName, String lastName, Role role) {
+    public PortalUser create(String email, String rawPassword, String firstName, String lastName, Role role, boolean activated) {
         logger.info("Create user, email [{}], role [{}]", email, role);
 
         PortalUser portalUser = PortalUser.builder()
@@ -66,6 +77,7 @@ public class PortalUserService {
                 .setPassword(passwordEncoder.encode(rawPassword))
                 .setAccessToken(tokenGenerator.generate())
                 .setRole(role)
+                .setActivated(activated)
                 .build();
         userRepository.save(portalUser);
         return portalUser;
@@ -106,17 +118,42 @@ public class PortalUserService {
         userRepository.delete(userId);
     }
 
-    public boolean register(String email, String password, Function<PortalUser, Boolean> onSuccess) {
+    public void registerWithActivation(String email, String password, String appUrl) {
+        PortalUser portalUser = register(email, password, false);
+        sendActivationEmail(email, appUrl, portalUser);
+    }
+
+    public PortalUser register(String email, String password, boolean activateAccount) {
         if (isEmailExist(email)) {
-            return false;
+            throw new EmailExistsException("user with email "+ email + " already exists");
         } else {
-            PortalUser portalUser = createUser(email, password);
-            return onSuccess.apply(portalUser);
+            return createUser(email, password, activateAccount);
         }
+    }
+
+    public PortalUser activate(String email, String token)
+            throws ActivationException {
+        PortalUser portalUser = userRepository.getByEmail(email);
+        if (portalUser.isActivated()) {
+            throw new ActivationException("User account is already activated");
+        }
+        ActivationToken activationToken = tokenRepository.findByUserId(portalUser.getId());
+        if(Objects.equals(token,activationToken.getToken())){
+            portalUser.setActivated(true);
+            userRepository.update(portalUser);
+            return portalUser;
+        }
+        throw new ActivationException("Activation token is wrong");
     }
 
     public boolean isEmailExist(String email) {
         return userRepository.getByEmail(email) != null;
+    }
+
+    private void sendActivationEmail(String email, String appUrl, PortalUser portalUser) {
+        ActivationToken activationToken = new ActivationToken(portalUser.getId(), UUID.randomUUID().toString());
+        tokenRepository.save(activationToken);
+        eventPublisher.publishEvent(new PortalUserRegisteredEvent(activationToken.getToken(),email,appUrl));
     }
 
 

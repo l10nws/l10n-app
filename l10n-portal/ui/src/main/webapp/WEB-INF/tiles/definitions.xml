@@ -88,4 +88,16 @@
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
     </definition>
 
+    <definition name="activate_success" extends="EXTERNAL">
+        <put-attribute name="content" value="/WEB-INF/jsp/activate_success.jsp" />
+    </definition>
+
+    <definition name="activate_failure" extends="EXTERNAL">
+        <put-attribute name="content" value="/WEB-INF/jsp/activate_failure.jsp" />
+    </definition>
+
+    <definition name="register_success" extends="EXTERNAL">
+        <put-attribute name="content" value="/WEB-INF/jsp/register_success.jsp" />
+    </definition>
+
 </tiles-definitions>

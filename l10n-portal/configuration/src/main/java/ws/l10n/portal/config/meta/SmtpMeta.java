@@ -12,6 +12,7 @@ public class SmtpMeta implements Serializable {
     private String username;
     private String password;
     private boolean enable = false;
+    private boolean emailAccountActivationEnabled = false;
 
     public boolean isEnable() {
         return enable;
@@ -53,13 +54,23 @@ public class SmtpMeta implements Serializable {
         this.password = password;
     }
 
+    public boolean isEmailAccountActivationEnabled() {
+        return emailAccountActivationEnabled;
+    }
+
+    public void setEmailAccountActivationEnabled(boolean emailAccountActivationEnabled) {
+        this.emailAccountActivationEnabled = emailAccountActivationEnabled;
+    }
+
     @Override
     public String toString() {
         return "SmtpMeta{" +
-                ", host='" + host + '\'' +
+                "host='" + host + '\'' +
                 ", port=" + port +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", enable=" + enable +
+                ", emailAccountActivationEnabled=" + emailAccountActivationEnabled +
                 '}';
     }
 }
