@@ -23,7 +23,7 @@ public class AuthController {
         PortalUser user = portalUserRepository.getByAuthToken(authToken);
         if (user != null) {
             PortalSecurity.login(user);
-            return "redirect:/index";
+            return "redirect:/project/all";
         } else {
             return "redirect:/login";
         }

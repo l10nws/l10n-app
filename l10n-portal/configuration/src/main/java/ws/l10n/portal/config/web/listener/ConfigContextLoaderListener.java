@@ -35,6 +35,7 @@ public class ConfigContextLoaderListener extends ContextLoaderListener {
                 System.setProperty("l10n.mail.smtp.port", String.valueOf(configMeta.getSmtp().getPort()));
                 System.setProperty("l10n.mail.smtp.username", configMeta.getSmtp().getUsername());
                 System.setProperty("l10n.mail.smtp.password", configMeta.getSmtp().getPassword());
+                System.setProperty("l10n.activation.enabled", String.valueOf(configMeta.getSmtp().isEmailAccountActivationEnabled()));
                 System.setProperty("l10n.mail.noreply", configMeta.getMaillist().get("noreply"));
             }
 

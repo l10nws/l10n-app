@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ws.l10n.portal.repository.PortalUserRepository">
-
     <resultMap id="userMap" type="ws.l10n.portal.domain.PortalUser">
         <id column="u.id" property="id"/>
         <result column="u.email" property="email"/>
         <result column="u.password" property="password"/>
         <result column="u.first_name" property="firstName"/>
         <result column="u.last_name" property="lastName"/>
+        <result column="u.activated" property="activated"/>
         <result column="u.access_token" property="accessToken"/>
         <result column="u.role" property="role"/>
     </resultMap>
@@ -18,14 +18,14 @@
     <insert id="save" parameterType="ws.l10n.portal.domain.PortalUser" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id">
         INSERT INTO portal_user
-        (email, password, first_name, last_name, access_token, role)
+        (email, password, first_name, last_name, access_token, role, activated )
         VALUES
-        (#{email}, #{password}, #{firstName}, #{lastName}, #{accessToken}, #{role})
+        (#{email}, #{password}, #{firstName}, #{lastName}, #{accessToken}, #{role}, #{activated})
     </insert>
 
     <insert id="update" parameterType="ws.l10n.portal.domain.PortalUser">
         UPDATE portal_user
-        SET email = #{email}, password = #{password}, first_name = #{firstName}, last_name = #{lastName}, role = #{role}
+        SET email = #{email}, password = #{password}, first_name = #{firstName}, last_name = #{lastName}, role = #{role}, activated = #{activated}
         WHERE id = #{id}
     </insert>
 
@@ -43,6 +43,7 @@
             u.first_name as "u.first_name",
             u.last_name as "u.last_name",
             u.access_token as "u.access_token",
+            u.activated as "u.activated",
             u.role as "u.role"
         FROM
           portal_user u INNER JOIN user_permission up ON up.user_id = u.id
@@ -58,6 +59,7 @@
             u.first_name as "u.first_name",
             u.last_name as "u.last_name",
             u.access_token as "u.access_token",
+            u.activated as "u.activated",
             u.role as "u.role"
         FROM
             portal_user u
@@ -71,6 +73,7 @@
             u.first_name as "u.first_name",
             u.last_name as "u.last_name",
             u.access_token as "u.access_token",
+            u.activated as "u.activated",
             u.role as "u.role"
         FROM
           portal_user u
@@ -86,6 +89,7 @@
             u.first_name as "u.first_name",
             u.last_name as "u.last_name",
             u.access_token as "u.access_token",
+            u.activated as "u.activated",
             u.role as "u.role"
         FROM
           portal_user u
@@ -101,6 +105,7 @@
             u.first_name as "u.first_name",
             u.last_name as "u.last_name",
             u.access_token as "u.access_token",
+            u.activated as "u.activated",
             u.role as "u.role"
         FROM
           portal_user u
@@ -123,6 +128,7 @@
         u.first_name as "u.first_name",
         u.last_name as "u.last_name",
         u.access_token as "u.access_token",
+        u.activated as "u.activated",
         u.role as "u.role"
         FROM
         auth_token t join portal_user u on t.user_id = u.id

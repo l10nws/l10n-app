@@ -16,12 +16,16 @@ dependencies {
 
     compile 'javax.annotation:jsr250-api:1.0'
     compile 'org.springframework:spring-context-support:4.2.5.RELEASE'
-    compile 'javax.mail:mail:1.4'
+
+    compile 'com.sun.mail:javax.mail:1.6.0'
+
 
     compile 'org.springframework:spring-aop:4.1.4.RELEASE'
     compile 'org.freemarker:freemarker:2.3.20'
     compile 'org.springframework.security:spring-security-core:4.0.2.RELEASE'
     compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.velocity:velocity:1.7'
+    compile 'org.apache.velocity:velocity-tools:2.0'
 
     testCompile 'org.springframework:spring-test:2.5'
     testCompile 'junit:junit:4.12'

@@ -142,12 +142,19 @@ public class PortalConfigReader {
         String username = getString(xpath.compile("username").evaluate(node, XPathConstants.STRING));
         String password = getString(xpath.compile("password").evaluate(node, XPathConstants.STRING));
         String enable = getString(xpath.compile("@enable").evaluate(node, XPathConstants.STRING));
+        String emailAccountActivationEnabled = getString(xpath.compile("@emailAccountActivationEnabled").evaluate(node, XPathConstants.STRING));
 
         SmtpMeta smtpMeta = new SmtpMeta();
 
         if (enable != null) {
             LOGGER.info("Smtp enable is [{}]!", enable);
             smtpMeta.setEnable(Boolean.valueOf(enable));
+        }
+
+        if (emailAccountActivationEnabled != null) {
+            LOGGER.info("Account activation via email is [{}]!",
+                    (Boolean.valueOf(emailAccountActivationEnabled) ? "enabled" : "disabled"));
+            smtpMeta.setEmailAccountActivationEnabled(Boolean.valueOf(emailAccountActivationEnabled));
         }
 
         if (StringUtils.isEmpty(host)) {

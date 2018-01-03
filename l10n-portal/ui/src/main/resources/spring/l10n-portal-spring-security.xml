@@ -12,6 +12,7 @@
 
     <http authentication-manager-ref="authenticationManager" use-expressions="true">
         <intercept-url pattern="/register" access="permitAll()"/>
+        <intercept-url pattern="/register/activate" access="permitAll()"/>
         <intercept-url pattern="/login" access="permitAll()"/>
         <intercept-url pattern="/auth" access="permitAll()"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -27,7 +28,7 @@
                 class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
         <beans:property name="alwaysUseDefaultTargetUrl" value="false"/>
         <beans:property name="targetUrlParameter" value="error"/>
-        <beans:property name="defaultTargetUrl" value="/index"/>
+        <beans:property name="defaultTargetUrl" value="/project/all"/>
     </beans:bean>
 
     <authentication-manager id="authenticationManager">

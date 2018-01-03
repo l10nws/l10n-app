@@ -31,6 +31,7 @@ public class PortalConfigReaderTest {
         Assert.assertEquals("admin", configMeta.getSuperusers().get(0).getPassword());
 
         Assert.assertNotNull(configMeta.getSmtp());
+        Assert.assertTrue(configMeta.getSmtp().isEmailAccountActivationEnabled());
         Assert.assertEquals("localhost", configMeta.getSmtp().getHost());
         Assert.assertEquals(587, configMeta.getSmtp().getPort().longValue());
         Assert.assertEquals("admin", configMeta.getSmtp().getUsername());
