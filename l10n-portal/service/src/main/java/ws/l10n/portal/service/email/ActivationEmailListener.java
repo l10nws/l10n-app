@@ -31,9 +31,10 @@ public class ActivationEmailListener {
     }
 
     private String constructActivationEmailBody(String activationToken, String email, String appUrl) {
-        Template template = velocityEngine.getTemplate("velocity/activation-email.vm");
+        Template template = velocityEngine.getTemplate("velocity/email-template.vm");
 
         VelocityContext context = new VelocityContext();
+        context.put("contentTemplate", "velocity/activation-email.vm");
         context.put("token", activationToken);
         context.put("email", email);
         context.put("appUrl", appUrl);
