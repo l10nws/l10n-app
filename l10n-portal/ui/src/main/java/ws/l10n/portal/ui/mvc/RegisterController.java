@@ -52,7 +52,7 @@ public class RegisterController {
             }
         } catch (EmailExistsException ex) {
             logger.debug(ex.getMessage(), ex);
-            return "register?error";
+            return "redirect:/register?error";
         }
     }
 

@@ -11,7 +11,7 @@
 
     <context:component-scan base-package="ws.l10n.portal.service"/>
     <task:annotation-driven executor="sendEmailExecutor"/>
-    <task:executor id="sendEmailExecutor" pool-size="2"/>
+    <task:executor id="sendEmailExecutor" pool-size="1"/>
 
     <bean id="velocityEngine" class="org.apache.velocity.app.VelocityEngine" init-method="init">
         <constructor-arg name="p">

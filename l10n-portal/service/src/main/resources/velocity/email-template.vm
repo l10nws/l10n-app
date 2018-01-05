@@ -1,0 +1,70 @@
+#parse( "$contentTemplate" )
+<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="border-collapse:collapse!important;height:100%!important;width:100%!important;background:#f7f7f7;margin:0;padding:0" bgcolor="#F7F7F7">
+    <tbody>
+    <tr>
+        <td align="center" valign="top" style="height:100%!important;width:100%!important;margin:0;padding:20px">
+            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse!important;width:600px;border:0px transparent">
+                <tbody>
+                <tr>
+                    <td align="center" valign="top" style="font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif">
+
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important;background:#f7f7f7" bgcolor="#F7F7F7">
+                            <tbody>
+                            <tr>
+                                <td valign="top" style="text-align:center;color:#808080;font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif;font-size:10px;line-height:125%;padding:20px 30px 40px" align="center">
+                                    <img src="https://l10n.ws/images/favicon.png" style="display:inline-block;text-align:center;width:60px;margin-bottom:40px;min-height:auto;line-height:100%;outline:none;text-decoration:none;border:0" class="CToWUd">
+
+                                    <h1 style="text-align:center;font-size:36px;line-height:55px;font-weight:100;color:#444!important;display:block;font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif;font-style:normal;letter-spacing:normal;margin:0 0 10px" align="center">$title</h1>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="top" style="font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse!important">
+                            <tbody>
+                            <tr>
+                                <td align="center" valign="top" style="color:#505050;font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif;font-size:16px;line-height:160%;background:#fff;padding:35px 40px 40px" bgcolor="#fff">
+                                    <table style="border-collapse:collapse!important">
+                                        <tbody>
+                                        <tr>
+                                            <td style="font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif" align="center">
+                                                $content
+                                                <br>
+
+                                                <br>
+                                                Team L10n
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="top" style="font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif">
+
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align:center;border-collapse:collapse!important;margin-top:20px;background:#f7f7f7" bgcolor="#F7F7F7">
+                            <tbody>
+                            <tr>
+                                <td valign="top" style="font-family:'Proxima Nova','Open Sans','Helvetica Neue',Calibri,Helvetica,sans-serif;color:#808080;font-size:12px;line-height:150%;text-align:center;padding:0 20px 17px" align="center">
+                                    <em>Copyright © 2017 - L10n.ws<br> <br>All rights reserved.</em>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
